@@ -175,8 +175,8 @@ class RestaurantChatbot:
         # Updated to use new validation structure
         error_msgs = [f"⚠️ SAFETY WARNING: {e.message}" for e in validation.critical_errors]
         return ("I apologize, but I need to verify my information for your safety.\n" + 
-                "\n".join(error_msgs) + llm_response + 
-                "\nPlease let me try again. What would you like to know?")
+                "\n".join(error_msgs) + 
+                "\n I am sorry, but your ordering contains a known allergen. Please let me try again. What would you like to know?")
 
     def _handle_validation_error(self, validation) -> str:
         return ("I apologize, but I'm not confident in the accuracy of my response regarding prices or details. "
