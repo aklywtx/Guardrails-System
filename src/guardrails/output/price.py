@@ -39,7 +39,7 @@ class PriceValidator(BaseValidator):
                 
                 stated_price = float(stated_price_str)
                 actual_price = dish_info['price']
-                print(stated_price, actual_price)
+
                 # 4. Compare with a tiny epsilon for float safety
                 if abs(stated_price - actual_price) > 0.001:
                     # If a mismatch is found, fix the wrong price

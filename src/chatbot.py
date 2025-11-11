@@ -41,14 +41,7 @@ class RestaurantChatbot:
             self.client = ollama.Client(host=ollama_host)
         else:
             self.client = ollama
-        # IMPORTANT INSTRUCTIONS:
-        # 1. ONLY provide information from the menu above. Never make up dishes, prices, or allergen information.
-        # 2. If asked about a dish not on the menu, clearly state it's not available.
-        # 3. Be precise about prices - use the exact prices from the menu.
-        # 4. Take allergies and dietary restrictions VERY seriously - always provide accurate allergen information.
-        # 5. Be conversational and friendly, but prioritize accuracy over creativity.
-        # 6. Keep responses concise and clear for audio output (remember, users are visually impaired).
-        # 7. When recommending dishes, consider what the user has told you about their preferences and restrictions.
+
     def _create_system_prompt(self) -> str:
         """
         Create system prompt with menu information.
@@ -59,9 +52,21 @@ class RestaurantChatbot:
         You help users browse the menu, understand dishes, check prices, handle dietary restrictions, and place orders.
 
         {self.menu}
+        
+        IMPORTANT INSTRUCTIONS:
+        1. ONLY provide information from the menu above. Never make up dishes, prices, or allergen information.
+        2. If asked about a dish not on the menu, clearly state it's not available.
+        3. Be precise about prices - use the exact prices from the menu.
+        4. Take allergies and dietary restrictions VERY seriously - always provide accurate allergen information.
+        5. Be conversational and friendly, but prioritize accuracy over creativity.
 
+        ACCESSIBILITY REQUIREMENTS (CRITICAL - users will hear responses):
+        6. Keep responses SHORT - 1-3 sentences preferred.
+        7. Put the MOST IMPORTANT information FIRST (price, allergens, availability).
+        8. Use SIMPLE, DIRECT language - avoid elaborate descriptions.
+        9. For yes/no questions, answer directly first, then explain briefly if needed.
 
-        Your goal is to help users confidently order food that meets their needs.
+        Your goal is to help users confidently order food that meets their needs QUICKLY and CLEARLY.
         """
 
     def process_query(self, user_input: str, skip_guardrails: bool = False) -> Dict[str, Any]:
